@@ -20,3 +20,20 @@ df_rename = df.rename(columns={"Pclass":"Passenger Class", "Fare":"Payment"})
 print(df_rename.info())
 #Performing mathematical calculations on multiple columns
 print(df[["Age", "Fare"]].mean())
+print(df.agg({"Age": ["min", "max", "median"],
+              "Fare": ["min", "max", "median"]}))
+#Group by data (category wise)
+print(df[["Pclass", "Age"]].groupby("Pclass").mean())
+print(df.groupby("Pclass")["Age"].mean())
+#Sorting the data
+df = df.sort_values(by="Age")
+print(df[["Name", "Age"]].head())
+df.sort_values(by=["Pclass", "Age"], ascending=False)
+print(df[["Pclass", "Age"]].head())
+#Operations on text data
+df["Name_lower"] = df["Name"].str.lower()
+print(df["Name_lower"].head())
+df["Name_split"] = df["Name"].str.split(" ")
+print(df["Name_split"].head())
+df["Sex_replace"] = df["Sex"].replace({"male": "Male", "female": "Female"})
+print(df["Sex_replace"].head())
